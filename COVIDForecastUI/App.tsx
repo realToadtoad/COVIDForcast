@@ -43,11 +43,9 @@ function wait(timeout: number) {
   });
 }
 
-let currentLocation;
+let currentLocation: any;
 let currentState: string;
-let currentLat: number;
-let currentLong: number;
-export { currentLocation, currentState, currentLat, currentLong };
+export { currentLocation, currentState };
 
 const geocode = new ReverseGeocode();
 
@@ -121,8 +119,6 @@ export default class App extends React.Component {
     let state = temp4[0].name;
     console.log(state);
     currentState = state;
-    currentLat =  temp.coords.latitude;
-    currentLong = temp.coords.longitude;
   }
 
   async UNSAFE_componentWillMount() {

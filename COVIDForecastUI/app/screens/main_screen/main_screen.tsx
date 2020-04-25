@@ -23,7 +23,7 @@ import {
 import { WebView } from "react-native-webview";
 
 import { CurrentCases } from "../../components/current_cases/current_cases";
-import { currentLocation, currentState, currentLat, currentLong } from "../../../App";
+import { currentLocation, currentState} from "../../../App";
 import { UnsplashWidget } from "../../components/unsplash_widget/unsplash_widget";
 import { SevenDayForecast } from "../../components/seven_day_forecast/seven_day_forecast";
 
@@ -36,10 +36,18 @@ import MapView,
 let deviceWidth = Dimensions.get('window').width;
 let deviceHeight = Dimensions.get('window').height;
 
-let currLat = currentLat;
-let currLong = currentLong;
+function wait(timeout: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+}
 
 export class MainScreen extends React.Component {
+
+  async UNSAFE_componentWillMount() {
+    await wait(3000);
+    this.forceUpdate();
+  }
   
   render() {
     return (
@@ -77,14 +85,14 @@ export class MainScreen extends React.Component {
           <View style={{ height: 12.5 }} />
           <View style={styles.mapContainer}>
             <MapView style={styles.map} initialRegion={{
-              latitude: currLat,
-              longitude: currLong,
+              latitude: currentLocation.coords.latitude,
+              longitude: currentLocation.coords.longitude,
               latitudeDelta: 15,
               longitudeDelta: 15,
             }}
             customMapStyle={mapStyleJSON.mapStyle}>
               <Marker
-              coordinate={{ latitude: currLat, longitude: currLong }}>
+              coordinate={{ latitude: currentLocation.coords.latitude, longitude: currentLocation.coords.longitude }}>
 
               <Callout>
                 <Text style={styles.calloutText}>Your Location</Text>
