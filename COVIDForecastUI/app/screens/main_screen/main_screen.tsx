@@ -5,6 +5,7 @@ import {
   Dimensions,
   StatusBar,
   ScrollView,
+  Image,
 } from "react-native";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import {
@@ -55,11 +56,12 @@ export class MainScreen extends React.Component {
     let jsonVals = Object.values(capitalsJSON);
     for(var i = 0; i < 50; i++) {
       statesMarkers.push(
-        <Marker
+        <Marker key = {i}
           coordinate={{ latitude: parseFloat(jsonVals[i].lat), longitude:  parseFloat(jsonVals[i].long)}}>
           <Callout>
             <Text style={styles.calloutText}>{jsonVals[i].capital}, {jsonVals[i].name}</Text>
           </Callout>
+          <Image source={require('../../../assets/blue-marker.png')}/>
         </Marker>
       );
     }
