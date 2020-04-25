@@ -28,6 +28,7 @@ import { UnsplashWidget } from "../../components/unsplash_widget/unsplash_widget
 import { SevenDayForecast } from "../../components/seven_day_forecast/seven_day_forecast";
 
 import mapStyleJSON from '../../../mapStyle.json';
+import capitalsJSON from '../../../us-capitals.json';
 
 import MapView,
 { Marker, Callout, Polygon, Circle }
@@ -50,6 +51,19 @@ export class MainScreen extends React.Component {
   }
   
   render() {
+    let statesMarkers = [];
+    let jsonVals = Object.values(capitalsJSON);
+    for(var i = 0; i < 50; i++) {
+      statesMarkers.push(
+        <Marker
+          coordinate={{ latitude: parseFloat(jsonVals[i].lat), longitude:  parseFloat(jsonVals[i].long)}}>
+          <Callout>
+            <Text style={styles.calloutText}>{jsonVals[i].capital}, {jsonVals[i].name}</Text>
+          </Callout>
+        </Marker>
+      );
+    }
+    console.log();
     return (
       <Layout style={styles.container}>
         <StatusBar />
@@ -99,6 +113,7 @@ export class MainScreen extends React.Component {
               </Callout>
 
               </Marker>
+              {statesMarkers}
             </MapView>
           </View>
           <View style={{ marginRight: 12.5, alignItems: "flex-end", width: deviceWidth-25 }}>
