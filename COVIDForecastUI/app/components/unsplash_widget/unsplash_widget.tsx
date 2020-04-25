@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     height: deviceWidth + 20,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 13.5
+    marginTop: 12.5
   },
   image: {
     height: deviceWidth - 25,

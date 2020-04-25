@@ -20,6 +20,7 @@ import { AppLoading } from "expo";
 import ReverseGeocode, { ILocation, IGeocode } from "bigdatacloud-reverse-geocoding";
 
 import { MainScreen } from "./app/screens/main_screen/main_screen";
+import { AboutScreen } from "./app/screens/about_screen/about_screen";
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
@@ -142,6 +143,13 @@ export const StackNavigator = createStackNavigator({
     screen: MainScreen,
     navigationOptions: {
       headerShown: false,
+    },
+  },
+  AboutScreen: {
+    screen: AboutScreen,
+    navigationOptions: {
+      headerShown: true,
+      title: "About"
     },
   },
 });
