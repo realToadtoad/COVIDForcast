@@ -17,7 +17,7 @@ import {
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
-export class MainScreen extends React.Component {
+export class Name extends React.Component {
   render() {
     return (
       <Layout style={styles.container}>

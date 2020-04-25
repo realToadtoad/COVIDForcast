@@ -13,11 +13,12 @@ import {
   Layout,
   Text,
 } from "@ui-kitten/components";
+import * as Location from 'expo-location';
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
-export class MainScreen extends React.Component {
+export class CurrentCases extends React.Component {
   render() {
     return (
       <Layout style={styles.container}>
@@ -31,7 +32,8 @@ export class MainScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: deviceWidth,
+    height: deviceHeight/6,
     alignItems: "center",
     justifyContent: "center",
   },
