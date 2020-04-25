@@ -100,7 +100,7 @@ function getCurrentStatusEmoji(item: any) {
   } else if (prediction - yesterday <= 9000) {
     return "😟";
   } else {
-    return "😫";
+    return "😫"; // I T ' S   O V E R   9 0 0 0 ! ! ! !
   }
 }
 

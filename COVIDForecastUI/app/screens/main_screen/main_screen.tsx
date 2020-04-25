@@ -20,6 +20,7 @@ import {
   Text,
   Icon,
 } from "@ui-kitten/components";
+import { WebView } from "react-native-webview";
 
 import { CurrentCases } from "../../components/current_cases/current_cases";
 import { currentLocation, currentState } from "../../../App";
@@ -35,7 +36,7 @@ export class MainScreen extends React.Component {
       <Layout style={styles.container}>
         <StatusBar />
         <ScrollView
-          contentContainerStyle={{alignItems: "center"}}
+          contentContainerStyle={{ alignItems: "center" }}
           style={{ height: deviceHeight, width: deviceWidth }}
         >
           <UnsplashWidget />
@@ -54,8 +55,16 @@ export class MainScreen extends React.Component {
               {currentState.toUpperCase()}
             </Text>
           </View>
-          <View style={{height: 25}} />
+          <View style={{ height: 25 }} />
           <SevenDayForecast />
+          <View style={{ height: 25 }} />
+          <View style={styles.webEmbed}>
+            <WebView
+              source={{ uri: "https://datahub.io/core/covid-19/view/1" }}
+              style={styles.webEmbed}
+            />
+          </View>
+          <View style={{ height: 25 }} />
         </ScrollView>
       </Layout>
     );
@@ -70,5 +79,11 @@ const styles = StyleSheet.create({
   icon: {
     height: 20,
     width: 20,
+  },
+  webEmbed: {
+    width: deviceWidth - 25,
+    height: (3.1 * deviceHeight) / 5,
+    borderRadius: 10,
+    overflow: "hidden"
   },
 });
