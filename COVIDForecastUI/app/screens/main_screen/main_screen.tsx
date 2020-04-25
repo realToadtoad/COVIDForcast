@@ -32,7 +32,10 @@ import mapStyleJSON from '../../../mapStyle.json';
 import MapView,
 { Marker, Callout, Polygon, Circle }
   from 'react-native-maps';
-  
+
+let deviceWidth = Dimensions.get('window').width;
+let deviceHeight = Dimensions.get('window').height;
+
 let currLat = currentLat;
 let currLong = currentLong;
 
@@ -72,6 +75,24 @@ export class MainScreen extends React.Component {
             />
           </View>
           <View style={{ height: 12.5 }} />
+          <View style={styles.mapContainer}>
+            <MapView style={styles.map} initialRegion={{
+              latitude: currLat,
+              longitude: currLong,
+              latitudeDelta: 15,
+              longitudeDelta: 15,
+            }}
+            customMapStyle={mapStyleJSON.mapStyle}>
+              <Marker
+              coordinate={{ latitude: currLat, longitude: currLong }}>
+
+              <Callout>
+                <Text style={styles.calloutText}>Your Location</Text>
+              </Callout>
+
+              </Marker>
+            </MapView>
+          </View>
           <View style={{ marginRight: 12.5, alignItems: "flex-end", width: deviceWidth-25 }}>
             <Text
               appearance="hint"
@@ -83,25 +104,6 @@ export class MainScreen extends React.Component {
           </View>
           <View style={{ height: 12.5 }} />
         </ScrollView>
-          <View style={styles.mapContainer}>
-            <MapView style={styles.map} initialRegion={{
-              latitude: currLat,
-              longitude: currLong,
-              latitudeDelta: 15,
-              longitudeDelta: 15,
-            }}
-            customMapStyle={mapStyleJSON.mapStyle}
-              <Marker
-            >
-              coordinate={{ latitude: currLat, longitude: currLong }}>
-
-              <Callout>
-                <Text style={styles.calloutText}>Your Location</Text>
-              </Callout>
-
-            </Marker>
-            </MapView>
-          </View>
       </Layout>
     );
   }
@@ -116,7 +118,6 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20,
   },
-  },
   webEmbed: {
     width: deviceWidth - 25,
     height: (3.1 * deviceHeight) / 5,
@@ -127,8 +128,8 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
   },
   map: {
-    width: Dimensions.get('window').width-25,
-    height: Dimensions.get('window').height/2,
+    width: deviceWidth-25,
+    height: deviceHeight/2,
   },
   mapContainer: {
     justifyContent: "center",

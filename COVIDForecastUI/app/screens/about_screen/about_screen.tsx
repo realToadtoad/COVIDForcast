@@ -88,7 +88,7 @@ export class AboutScreen extends React.Component {
               style={styles.link}
               onPress={() => Linking.openURL("https://github.com/ArvindVivek")}
             >
-              Arvind Vivekanadan
+              Arvind Vivekanandan
             </Text>
           </View>
           <View style={{ height: 12.5 }} />
