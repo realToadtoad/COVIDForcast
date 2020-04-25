@@ -20,7 +20,7 @@ import { AppLoading } from "expo";
 import ReverseGeocode, { ILocation, IGeocode } from "bigdatacloud-reverse-geocoding";
 
 import { MainScreen } from "./app/screens/main_screen/main_screen";
-import { AboutScreen } from "./app/screens/about_screen/about_screen";
+import { AboutNavigator as AboutScreen } from "./app/screens/about_screen/about_screen";
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
@@ -130,7 +130,7 @@ export default class App extends React.Component {
             theme={theme}
             customMapping={customMapping}
           >
-            <AppNavigator />
+            <AppNavigator theme="dark" />
           </ApplicationProvider>
         </React.Fragment>
       );

@@ -70,7 +70,6 @@ export class UnsplashWidget extends React.Component {
   render() {
     return (
       <Layout style={styles.container}>
-        <ScrollView>
           <Image source={{ uri: imgUrl }} style={styles.image} />
           <View
             style={{
@@ -92,7 +91,6 @@ export class UnsplashWidget extends React.Component {
               Unsplash
             </Text>
           </View>
-        </ScrollView>
       </Layout>
     );
   }

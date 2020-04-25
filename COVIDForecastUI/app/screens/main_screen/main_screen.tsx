@@ -64,7 +64,17 @@ export class MainScreen extends React.Component {
               style={styles.webEmbed}
             />
           </View>
-          <View style={{ height: 25 }} />
+          <View style={{ height: 12.5 }} />
+          <View style={{ marginRight: 12.5, alignItems: "flex-end", width: deviceWidth-25 }}>
+            <Text
+              appearance="hint"
+              style={[styles.link, { textAlign: "right" }]}
+              onPress={() => this.props.navigation.navigate("AboutScreen")}
+            >
+              About this app
+            </Text>
+          </View>
+          <View style={{ height: 12.5 }} />
         </ScrollView>
       </Layout>
     );
@@ -84,6 +94,9 @@ const styles = StyleSheet.create({
     width: deviceWidth - 25,
     height: (3.1 * deviceHeight) / 5,
     borderRadius: 10,
-    overflow: "hidden"
+    overflow: "hidden",
+  },
+  link: {
+    textDecorationLine: "underline",
   },
 });
