@@ -33,7 +33,7 @@ function wait(timeout: number) {
 }
 
 let currentLocation;
-let currentState;
+let currentState: string;
 export { currentLocation, currentState };
 
 const geocode = new ReverseGeocode();
