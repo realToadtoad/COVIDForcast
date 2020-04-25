@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: deviceWidth-25,
-    height: deviceHeight/2,
+    height: deviceHeight*0.75,
   },
   mapContainer: {
     justifyContent: "center",
