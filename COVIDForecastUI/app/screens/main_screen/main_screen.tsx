@@ -142,6 +142,10 @@ const styles = StyleSheet.create({
   mapContainer: {
     justifyContent: "center",
     alignItems: "center",
+    width: deviceWidth-25,
+    height: deviceHeight*0.75,
+    borderRadius: 10,
+    overflow: "hidden"
   },
   calloutText: {
     color: 'black'
