@@ -1,6 +1,13 @@
 // https://source.unsplash.com/collection/9717149/
 import React from "react";
-import { StyleSheet, View, Dimensions, Image, Linking } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Dimensions,
+  Image,
+  Linking,
+  ScrollView,
+} from "react-native";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import {
   createAppContainer,
@@ -39,13 +46,17 @@ async function fetchPhoto() {
   imgUrl = data.urls.regular;
   let firstName = "";
   let lastName = "";
+  let space = " ";
   if (data.user.first_name != null) {
     firstName = data.user.first_name;
   }
   if (data.user.last_name != null) {
     lastName = data.user.last_name;
   }
-  user = firstName + " " + lastName;
+  if (firstName == "" || lastName == "") {
+    space = "";
+  }
+  user = firstName + space + lastName;
   userLink = data.user.links.html;
 }
 
@@ -59,20 +70,29 @@ export class UnsplashWidget extends React.Component {
   render() {
     return (
       <Layout style={styles.container}>
-        <Image source={{ uri: imgUrl }} style={styles.image} />
-        <View
-          style={{
-            flexDirection: "row",
-            alignSelf: "flex-end",
-            marginTop: 5,
-            marginRight: 13.5,
-          }}
-        >
-          <Text>Photo by </Text>
-          <Text style={styles.link} onPress={() => Linking.openURL(userLink)}>{user}</Text>
-          <Text> on </Text>
-          <Text style={styles.link} onPress={() => Linking.openURL(unsplashUrl)}>Unsplash</Text>
-        </View>
+        <ScrollView>
+          <Image source={{ uri: imgUrl }} style={styles.image} />
+          <View
+            style={{
+              flexDirection: "row",
+              alignSelf: "flex-end",
+              marginTop: 5,
+              marginRight: 13.5,
+            }}
+          >
+            <Text>Photo by </Text>
+            <Text style={styles.link} onPress={() => Linking.openURL(userLink)}>
+              {user}
+            </Text>
+            <Text> on </Text>
+            <Text
+              style={styles.link}
+              onPress={() => Linking.openURL(unsplashUrl)}
+            >
+              Unsplash
+            </Text>
+          </View>
+        </ScrollView>
       </Layout>
     );
   }
@@ -83,6 +103,7 @@ const styles = StyleSheet.create({
     height: deviceWidth + 20,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 13.5
   },
   image: {
     height: deviceWidth - 25,
@@ -90,6 +111,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   link: {
-    textDecorationLine: 'underline'
-  }
+    textDecorationLine: "underline",
+  },
 });

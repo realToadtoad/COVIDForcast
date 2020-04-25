@@ -98,6 +98,9 @@ export class CurrentCases extends React.Component {
           <Layout style={styles.rightSideBottom}>
             <View style={{ margin: 5 }}>
               <Text style={styles.lowerText}>PREDICTION</Text>
+              <Text category="h2" style={styles.subheaderText}>
+                ??????
+              </Text>
             </View>
           </Layout>
         </Layout>
