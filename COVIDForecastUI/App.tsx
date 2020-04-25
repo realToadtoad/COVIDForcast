@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, Dimensions, BackHandler } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  BackHandler,
+  StatusBar,
+} from "react-native";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import {
   createAppContainer,
@@ -17,7 +24,10 @@ import * as Font from "expo-font";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
-import ReverseGeocode, { ILocation, IGeocode } from "bigdatacloud-reverse-geocoding";
+import ReverseGeocode, {
+  ILocation,
+  IGeocode,
+} from "bigdatacloud-reverse-geocoding";
 
 import { MainScreen } from "./app/screens/main_screen/main_screen";
 import { AboutNavigator as AboutScreen } from "./app/screens/about_screen/about_screen";
@@ -94,14 +104,17 @@ export default class App extends React.Component {
     let temp = await Location.getCurrentPositionAsync({});
     console.log(temp);
     currentLocation = temp;
-    let temp2 = await geocode.locate({lat: temp.coords.latitude, long: temp.coords.longitude});
+    let temp2 = await geocode.locate({
+      lat: temp.coords.latitude,
+      long: temp.coords.longitude,
+    });
     let temp3: any;
     temp3 = temp2.localityInfo.administrative;
-    if(temp3 == undefined) {
+    if (temp3 == undefined) {
       temp3 = [];
     }
-    let temp4 = temp3.filter(obj => {
-      return obj.adminLevel == 4
+    let temp4 = temp3.filter((obj) => {
+      return obj.adminLevel == 4;
     });
     let state = temp4[0].name;
     console.log(state);
@@ -149,7 +162,7 @@ export const StackNavigator = createStackNavigator({
     screen: AboutScreen,
     navigationOptions: {
       headerShown: true,
-      title: "About"
+      title: "About",
     },
   },
 });
