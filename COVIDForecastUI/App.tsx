@@ -17,6 +17,7 @@ import * as Font from "expo-font";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { AppLoading } from "expo";
+import ReverseGeocode, { ILocation, IGeocode } from "bigdatacloud-reverse-geocoding";
 
 import { MainScreen } from "./app/screens/main_screen/main_screen";
 
@@ -32,7 +33,10 @@ function wait(timeout: number) {
 }
 
 let currentLocation;
-export { currentLocation };
+let currentState;
+export { currentLocation, currentState };
+
+const geocode = new ReverseGeocode();
 
 export default class App extends React.Component {
   fontsLoaded = false;
@@ -89,6 +93,18 @@ export default class App extends React.Component {
     let temp = await Location.getCurrentPositionAsync({});
     console.log(temp);
     currentLocation = temp;
+    let temp2 = await geocode.locate({lat: temp.coords.latitude, long: temp.coords.longitude});
+    let temp3: any;
+    temp3 = temp2.localityInfo.administrative;
+    if(temp3 == undefined) {
+      temp3 = [];
+    }
+    let temp4 = temp3.filter(obj => {
+      return obj.adminLevel == 4
+    });
+    let state = temp4[0].name;
+    console.log(state);
+    currentState = state;
   }
 
   async UNSAFE_componentWillMount() {
