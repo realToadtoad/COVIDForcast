@@ -24,6 +24,7 @@ export class AboutScreen extends React.Component {
         <Text>
           Prediction model by Justin Yue, Bill Feng, and Eric Wang
           UI by Aiden Sato and Arvind Vivekanadan
+          UI inspired by Today Weather
           Logo modified from FreePik on www.flaticon.com
           NYTimes and Johns Hopkins COVID-19 datasets used
         </Text>

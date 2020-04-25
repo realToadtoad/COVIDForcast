@@ -104,7 +104,18 @@ function getCurrentStatusEmoji(item: any) {
   }
 }
 
+function wait(timeout: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+}
+
 export class SevenDayForecast extends React.Component {
+  async componentDidMount() {
+    await wait(7000);
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <Layout style={styles.container}>
