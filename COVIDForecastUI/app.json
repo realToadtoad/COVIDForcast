@@ -26,6 +26,11 @@
     },
     "androidStatusBar": {
       "barStyle": "dark-content"
+    },
+    "android": {
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyDMME4jL2dfdeV-vK95sIL03OZfpqhU_Kw" }   
+     }
     }
   }
 }
