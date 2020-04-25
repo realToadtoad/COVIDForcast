@@ -1,6 +1,6 @@
 // https://source.unsplash.com/collection/9717149/
 import React from "react";
-import { StyleSheet, View, Dimensions, Image } from "react-native";
+import { StyleSheet, View, Dimensions, Image, Linking } from "react-native";
 import { EvaIconsPack } from "@ui-kitten/eva-icons";
 import {
   createAppContainer,
@@ -15,20 +15,64 @@ import {
   Text,
 } from "@ui-kitten/components";
 
+import { access_key } from "../../../api_key";
+
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
-let url = "https://source.unsplash.com/collection/9717149/";
-url += '?random_number=' + new Date().getTime();
+let urlOld = "https://source.unsplash.com/collection/9717149/";
+urlOld += "?random_number=" + new Date().getTime();
 
+let url =
+  "https://api.unsplash.com/photos/random?client_id=" +
+  access_key +
+  "&collections=9717149&?content_filter=high"; // 9717149 is the covid collection
+let user: string;
+let userLink: string;
+let imgUrl: string;
+const unsplashUrl = "https://unsplash.com/";
+
+async function fetchPhoto() {
+  let result = await fetch(url);
+  let data = await result.json();
+  console.log(data);
+  imgUrl = data.urls.regular;
+  let firstName = "";
+  let lastName = "";
+  if (data.user.first_name != null) {
+    firstName = data.user.first_name;
+  }
+  if (data.user.last_name != null) {
+    lastName = data.user.last_name;
+  }
+  user = firstName + " " + lastName;
+  userLink = data.user.links.html;
+}
+
+// the wrong way: <Image source={{uri: urlOld}} style={styles.image} />
 export class UnsplashWidget extends React.Component {
+  async UNSAFE_componentWillMount() {
+    await fetchPhoto();
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <Layout style={styles.container}>
-        <Image source={{uri: url}} style={styles.image} />
-        <Text style={{alignSelf: "flex-end", marginTop: 5, marginRight: 13.5}}>
-          test
-        </Text>
+        <Image source={{ uri: imgUrl }} style={styles.image} />
+        <View
+          style={{
+            flexDirection: "row",
+            alignSelf: "flex-end",
+            marginTop: 5,
+            marginRight: 13.5,
+          }}
+        >
+          <Text>Photo by </Text>
+          <Text style={styles.link} onPress={() => Linking.openURL(userLink)}>{user}</Text>
+          <Text> on </Text>
+          <Text style={styles.link} onPress={() => Linking.openURL(unsplashUrl)}>Unsplash</Text>
+        </View>
       </Layout>
     );
   }
@@ -36,13 +80,16 @@ export class UnsplashWidget extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: deviceWidth+20,
+    height: deviceWidth + 20,
     alignItems: "center",
     justifyContent: "center",
   },
   image: {
-    height: deviceWidth-25,
-    width: deviceWidth-25,
-    borderRadius: 10
+    height: deviceWidth - 25,
+    width: deviceWidth - 25,
+    borderRadius: 10,
+  },
+  link: {
+    textDecorationLine: 'underline'
   }
 });
