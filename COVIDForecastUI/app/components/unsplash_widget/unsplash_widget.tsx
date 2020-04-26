@@ -41,26 +41,34 @@ const unsplashUrl = "https://unsplash.com/";
 
 async function fetchPhoto() {
   let result = await fetch(url);
-  let data = await result.json();
-  console.log(data);
-  imgUrl = data.urls.regular;
-  let firstName = "";
-  let lastName = "";
-  let space = " ";
-  if (data.user.first_name != null) {
-    firstName = data.user.first_name;
+  let data;
+  if (result.status == 403) {
+    imgUrl = urlOld;
+    user = "unknown";
+    userLink = unsplashUrl;
+  } else {
+    data = await result.json();
+    console.log(data);
+    imgUrl = data.urls.regular;
+    let firstName = "";
+    let lastName = "";
+    let space = " ";
+    if (data.user.first_name != null) {
+      firstName = data.user.first_name;
+    }
+    if (data.user.last_name != null) {
+      lastName = data.user.last_name;
+    }
+    if (firstName == "" || lastName == "") {
+      space = "";
+    }
+    user = firstName + space + lastName;
+    userLink = data.user.links.html;
   }
-  if (data.user.last_name != null) {
-    lastName = data.user.last_name;
-  }
-  if (firstName == "" || lastName == "") {
-    space = "";
-  }
-  user = firstName + space + lastName;
-  userLink = data.user.links.html;
 }
 
 // the wrong way: <Image source={{uri: urlOld}} style={styles.image} />
+// the right way: <Image source={{ uri: imgUrl }} style={styles.image} />
 export class UnsplashWidget extends React.Component {
   async UNSAFE_componentWillMount() {
     await fetchPhoto();
@@ -70,27 +78,27 @@ export class UnsplashWidget extends React.Component {
   render() {
     return (
       <Layout style={styles.container}>
-          <Image source={{ uri: imgUrl }} style={styles.image} />
-          <View
-            style={{
-              flexDirection: "row",
-              alignSelf: "flex-end",
-              marginTop: 5,
-              marginRight: 13.5,
-            }}
+        <Image source={{ uri: imgUrl }} style={styles.image} />
+        <View
+          style={{
+            flexDirection: "row",
+            alignSelf: "flex-end",
+            marginTop: 5,
+            marginRight: 13.5,
+          }}
+        >
+          <Text>Photo by </Text>
+          <Text style={styles.link} onPress={() => Linking.openURL(userLink)}>
+            {user}
+          </Text>
+          <Text> on </Text>
+          <Text
+            style={styles.link}
+            onPress={() => Linking.openURL(unsplashUrl)}
           >
-            <Text>Photo by </Text>
-            <Text style={styles.link} onPress={() => Linking.openURL(userLink)}>
-              {user}
-            </Text>
-            <Text> on </Text>
-            <Text
-              style={styles.link}
-              onPress={() => Linking.openURL(unsplashUrl)}
-            >
-              Unsplash
-            </Text>
-          </View>
+            Unsplash
+          </Text>
+        </View>
       </Layout>
     );
   }
@@ -101,7 +109,7 @@ const styles = StyleSheet.create({
     height: deviceWidth + 20,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 12.5
+    marginTop: 12.5,
   },
   image: {
     height: deviceWidth - 25,
