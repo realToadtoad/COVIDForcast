@@ -1,0 +1,451 @@
+[
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@eva-design/eva",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/eva-design/eva.git",
+    "comment": "2.0.0-alpha.1"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@expo/webpack-config",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/expo/expo-cli.git",
+    "comment": "0.12.2"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@react-native-community/async-storage",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/react-native-community/react-native-async-storage.git",
+    "comment": "1.9.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@react-native-community/masked-view",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/react-native-community/react-native-masked-view.git",
+    "comment": "0.1.6"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@react-navigation/native",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/react-navigation/react-navigation/tree/master/packages/native",
+    "comment": "5.1.6"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@react-navigation/stack",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/react-navigation/react-navigation/tree/master/packages/stack",
+    "comment": "5.2.13"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@tensorflow/tfjs",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "Apache-2.0",
+    "link": "git+https://github.com/tensorflow/tfjs.git",
+    "comment": "1.7.3"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@tensorflow/tfjs-react-native",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "Apache-2.0",
+    "link": "https://registry.npmjs.org/@tensorflow/tfjs-react-native/-/tfjs-react-native-0.2.3.tgz",
+    "comment": "0.2.3"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@ui-kitten/components",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/akveo/react-native-ui-kitten.git",
+    "comment": "5.0.0-alpha.1"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@ui-kitten/eva-icons",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/akveo/react-native-ui-kitten.git",
+    "comment": "5.0.0-alpha.1"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@use-expo/font",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/bycedric/use-expo.git",
+    "comment": "2.0.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "bigdatacloud-reverse-geocoding",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "GPL-3.0",
+    "link": "git+https://github.com/bgrusnak/bigdatacloud-reverse-geocoding.git",
+    "comment": "0.2.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "expo",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/expo/expo.git",
+    "comment": "37.0.8"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "expo-camera",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/expo/expo.git",
+    "comment": "8.2.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "expo-file-system",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/expo/expo.git",
+    "comment": "8.1.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "expo-gl",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/expo/expo.git",
+    "comment": "8.1.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "expo-gl-cpp",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/expo/expo.git",
+    "comment": "8.1.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "expo-location",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/expo/expo.git",
+    "comment": "8.1.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "expo-permissions",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/expo/expo.git",
+    "comment": "8.1.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "moment",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/moment/moment.git",
+    "comment": "2.24.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "papaparse",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/mholt/PapaParse.git",
+    "comment": "5.2.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/facebook/react.git",
+    "comment": "16.9.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-dom",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/facebook/react.git",
+    "comment": "16.9.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "n/a",
+    "link": "n/a",
+    "comment": "skipping react-native@https://github.com/expo/react-native/archive/sdk-37.0.1.tar.gz (invalid semversion)"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-better-touchable",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/alexandrius/react-native-better-touchable.git",
+    "comment": "0.0.3"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-fs",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+ssh://git@github.com/itinance/react-native-fs.git",
+    "comment": "2.16.6"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-gesture-handler",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/software-mansion/react-native-gesture-handler.git",
+    "comment": "1.6.1"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-maps",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "link": "git+https://github.com/react-native-community/react-native-maps.git",
+    "comment": "0.26.1"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-reanimated",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/software-mansion/react-native-reanimated.git",
+    "comment": "1.7.1"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-safe-area-context",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/th3rdwave/react-native-safe-area-context.git",
+    "comment": "0.7.3"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-screens",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/kmagiera/react-native-screens.git",
+    "comment": "2.2.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-svg",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/react-native-community/react-native-svg.git",
+    "comment": "11.0.1"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-unimodules",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/unimodules/react-native-unimodules.git",
+    "comment": "0.9.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-web",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git://github.com/necolas/react-native-web.git",
+    "comment": "0.11.7"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-webview",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/react-native-community/react-native-webview.git",
+    "comment": "8.2.1"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-native-zip-archive",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git@github.com:mockingbot/react-native-zip-archive.git",
+    "comment": "5.0.2"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-navigation",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+ssh://git@github.com/react-navigation/react-navigation.git",
+    "comment": "4.3.8"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "react-navigation-stack",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/react-navigation/react-navigation-stack.git",
+    "comment": "2.3.13"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "tfjs-react-native-expo-fix",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "n/a",
+    "link": "n/a",
+    "comment": "skipping tfjs-react-native-expo-fix@https://github.com/realToadtoad/tfjs-react-native-expo-fix-fix/archive/test.tar.gz (invalid semversion)"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@babel/core",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/babel/babel/tree/master/packages/babel-core",
+    "comment": "7.9.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@types/papaparse",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+    "comment": "5.0.3"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@types/react",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+    "comment": "16.9.34"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "@types/react-native",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "https://github.com/DefinitelyTyped/DefinitelyTyped.git",
+    "comment": "0.61.23"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "babel-preset-expo",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "MIT",
+    "link": "git+https://github.com/expo/expo.git",
+    "comment": "8.1.0"
+  },
+  {
+    "department": "kessler",
+    "relatedTo": "stuff",
+    "name": "typescript",
+    "licensePeriod": "perpetual",
+    "material": "material",
+    "licenseType": "Apache-2.0",
+    "link": "git+https://github.com/Microsoft/TypeScript.git",
+    "comment": "3.8.3"
+  }
+]

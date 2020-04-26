@@ -21,7 +21,7 @@ import {
 } from "@ui-kitten/components";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import { default as LicenseData } from "../../../licenses-v1.json"; // made using license-report
+import { default as LicenseData } from "../../../licenses-v2.json"; // made using license-report
 import { Linking } from "expo";
 
 let deviceHeight = Dimensions.get("window").height;
