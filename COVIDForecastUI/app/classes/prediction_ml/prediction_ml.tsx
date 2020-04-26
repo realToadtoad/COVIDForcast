@@ -77,7 +77,7 @@ async function run() {
 //trainModel(model, data, data);
 
 
-
+/*
 export class Name extends React.Component {
   render() {
     return (
@@ -89,7 +89,7 @@ export class Name extends React.Component {
     );
   }
 }
-
+//*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
