@@ -15,6 +15,7 @@ import {
 } from "@ui-kitten/components";
 import moment from "moment";
 import { currentCases } from "../current_cases/current_cases";
+import { fetchPredictionDataNoExport } from "../../classes/prediction_ihme/prediction_ihme";
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
@@ -69,6 +70,26 @@ const sampleData = [
   },
 ];
 
+let data: any;
+
+async function fetchData() {
+  let tempArr = new Array();
+  let temp: any;
+  let date;
+  date = moment();
+  for (let i = 0; i < 7; i++) {
+    temp = await fetchPredictionDataNoExport(date.format("YYYY-MM-DD"));
+    console.log(temp)
+    tempArr.push({
+      index: i,
+      date: date.format("YYYY-MM-DD"),
+      prediction: temp,
+    });
+    date = date.add(1, "days");
+  }
+  return tempArr;
+}
+
 function getStyle(item: any) {
   if (item.index % 2 == 0) {
     return {
@@ -87,7 +108,7 @@ function getCurrentStatusEmoji(item: any) {
   if (item.index - 1 == -1) {
     yesterday = currentCases;
   } else {
-    yesterday = sampleData[item.index - 1].prediction;
+    yesterday = data[item.index - 1].prediction;
   }
   if (prediction - yesterday < 0) {
     return "🤔";
@@ -114,42 +135,48 @@ export class SevenDayForecast extends React.Component {
   async componentDidMount() {
     await wait(7000);
     this.forceUpdate();
+    data = await fetchData();
+    this.forceUpdate();
   }
 
   render() {
-    return (
-      <Layout style={styles.container}>
-        <Text
-          category="h6"
-          style={{
-            marginLeft: 12.5,
-            fontFamily: "Metropolis-Regular",
-            letterSpacing: 2.5,
-          }}
-        >
-          7 DAY FORECAST
-        </Text>
-        <ScrollView
-          horizontal={true}
-          style={{ width: deviceWidth, height: deviceHeight / 6 }}
-        >
-          {sampleData.map((item) => (
-            <Layout style={[styles.forecastBox, getStyle(item)]}>
-              <Text
-                category="label"
-                style={{ fontFamily: "Metropolis-Medium" }}
-              >
-                {moment(item.date).format("ddd").toUpperCase()}
-              </Text>
-              <Text category="h3">{getCurrentStatusEmoji(item)}</Text>
-              <Text style={{ fontFamily: "Metropolis-Bold" }}>
-                {item.prediction}
-              </Text>
-            </Layout>
-          ))}
-        </ScrollView>
-      </Layout>
-    );
+    if (typeof data == undefined || data == null) {
+      return <Layout style={styles.container} />;
+    } else {
+      return (
+        <Layout style={styles.container}>
+          <Text
+            category="h6"
+            style={{
+              marginLeft: 12.5,
+              fontFamily: "Metropolis-Regular",
+              letterSpacing: 2.5,
+            }}
+          >
+            7 DAY FORECAST
+          </Text>
+          <ScrollView
+            horizontal={true}
+            style={{ width: deviceWidth, height: deviceHeight / 6 }}
+          >
+            {data.map((item: any) => (
+              <Layout style={[styles.forecastBox, getStyle(item)]}>
+                <Text
+                  category="label"
+                  style={{ fontFamily: "Metropolis-Medium" }}
+                >
+                  {moment(item.date).format("ddd").toUpperCase()}
+                </Text>
+                <Text category="h3">{getCurrentStatusEmoji(item)}</Text>
+                <Text style={{ fontFamily: "Metropolis-Bold" }}>
+                  {item.prediction}
+                </Text>
+              </Layout>
+            ))}
+          </ScrollView>
+        </Layout>
+      );
+    }
   }
 }
 

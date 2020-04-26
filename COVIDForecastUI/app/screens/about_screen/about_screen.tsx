@@ -47,7 +47,18 @@ export class AboutScreen extends React.Component {
             }}
           ></Image>
           <View style={{ flexDirection: "row", width: deviceWidth - 25 }}>
-            <Text>Prediction model by </Text>
+            <Text>Prediction model (in app) by </Text>
+            <Text
+              style={styles.link}
+              onPress={() =>
+                Linking.openURL("http://covid19.healthdata.org")
+              }
+            >
+              IHME
+            </Text>
+            </View>
+          <View style={{ flexDirection: "row", width: deviceWidth - 25 }}>
+            <Text>Prediction model (out of app) by </Text>
             <Text
               style={styles.link}
               onPress={() =>

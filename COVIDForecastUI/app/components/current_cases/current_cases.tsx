@@ -74,7 +74,9 @@ export class CurrentCases extends React.Component {
     await wait(1000); // if anyone has a more elegant solution, please tell me
     this.forceUpdate();
     await fetchPredictionData(moment().format("YYYY-MM-DD"));
+    await wait(1000);
     console.log("new str")
+    this.forceUpdate();
   }
 
   render() {

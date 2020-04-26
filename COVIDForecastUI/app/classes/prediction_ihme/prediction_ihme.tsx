@@ -43,20 +43,26 @@ async function checkCache() {
 
 async function fetchCache(cacheDate: any) {
   let cacheCSV;
-  if (typeof cacheDate != undefined || typeof cacheDate != null) {
+  if (cacheDate != undefined || cacheDate != null) {
     cacheCSV = await IHMEStorage.getItem(cacheDate);
   }
 }
 
-async function downloadSaveExt(date: string) {
+async function downloadSaveExt(date: string, ex?: boolean) {
+  let tempPrediction: any;
+  if (ex == undefined) {
+    ex = true;
+  }
+  console.log("ex: " + ex);
   let url =
     "https://raw.githubusercontent.com/realToadtoad/CoVCast/master/ihme-covid-est.csv";
+  //if ( data == undefined || data == null) {
   Papa.parse(url, {
     download: true,
     complete: async function (res) {
       data = res.data;
       console.log("has data");
-      while (typeof data == undefined || typeof currentState == undefined) {
+      while (data == undefined || currentState == undefined) {
         await wait(500);
       }
       console.log("now filtering");
@@ -72,14 +78,49 @@ async function downloadSaveExt(date: string) {
       let prediction = Math.round(predictionD * (1 / 0.034));
       console.log("prediction");
       console.log(prediction);
-      predictionOut = prediction;
+      if (ex == true) {
+        predictionOut = prediction;
+      } else {
+        tempPrediction = prediction;
+      }
     },
   });
-  while (typeof data == undefined) {
-    await wait(500);
+  /*
+  } else {
+    console.log("has data");
+    while ( data == undefined ||  currentState == undefined) {
+      await wait(500);
+    }
+    console.log("now filtering");
+    let temp = data
+      .filter(function (obj: any) {
+        return obj[1] == currentState;
+      })
+      .find(function (obj: any) {
+        return obj[2] == date;
+      });
+    console.log(temp);
+    let predictionD = temp[21];
+    let prediction = Math.round(predictionD * (1 / 0.034));
+    console.log("prediction");
+    console.log(prediction);
+    if(ex) {
+      predictionOut = prediction;
+    } else {
+      tempPrediction = prediction;
+    }
+  }
+  //*/
+  if (ex == false) {
+    while (tempPrediction == undefined) {
+      await wait(500);
+      console.log("in loop");
+    }
+    console.log("out of loop");
+    return tempPrediction;
   }
   //let csv: string = Papa.unparse(data);
-  //while(typeof csv == undefined) {
+  //while( csv == undefined) {
   //  await wait(500);
   //}
   //await IHMEStorage.setItem(date, csv);
@@ -87,7 +128,7 @@ async function downloadSaveExt(date: string) {
 }
 
 export async function fetchPredictionData(date?: string) {
-  if (typeof date == undefined) {
+  if (date == undefined) {
     date = moment().format("YYYY-MM-DD");
   }
   let cacheDate = moment(await checkCache());
@@ -101,7 +142,7 @@ export async function fetchPredictionData(date?: string) {
       complete: async function (res) {
         data = res.data;
         console.log("has data");
-        while (typeof data == undefined || typeof currentState == undefined) {
+        while (data == undefined || currentState == undefined) {
           await wait(500);
         }
         console.log("now filtering");
@@ -119,6 +160,49 @@ export async function fetchPredictionData(date?: string) {
       },
     });
   }
+}
+
+export async function fetchPredictionDataNoExport(date?: string) {
+  if (date == undefined) {
+    date = moment().format("YYYY-MM-DD");
+  }
+  let cacheDate = moment(await checkCache());
+  let today = moment();
+  let duration = moment.duration(today.diff(cacheDate));
+  let tempPrediction;
+  //if (Math.abs(duration.asDays()) >= 7) {
+    await IHMEStorage.removeItem(date);
+    tempPrediction = await downloadSaveExt(date, false);
+    /*
+  } else {
+    Papa.parse(await IHMEStorage.getItem(date), {
+      complete: async function (res) {
+        data = res.data;
+        console.log("has data");
+        while (data == undefined || currentState == undefined) {
+          await wait(500);
+        }
+        console.log("now filtering");
+        let temp = data
+          .filter(function (obj: any) {
+            return obj[1] == currentState;
+          })
+          .find(function (obj: any) {
+            return obj[2] == date;
+          });
+        console.log("prediction");
+        let predictionD = temp[21];
+        let prediction = Math.round(predictionD * (1 / 0.034));
+        tempPrediction = prediction;
+      },
+    });
+  }
+  //*/
+  while (tempPrediction == undefined) {
+    await wait(500);
+  }
+  console.log("tempPrediction: " + tempPrediction);
+  return tempPrediction;
 }
 //*/
 /*
