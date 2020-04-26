@@ -126,6 +126,9 @@ export default class App extends React.Component {
   async UNSAFE_componentWillMount() {
     await this.initializeApp();
     let checkPerms = this.getLocationPermissions();
+    while(typeof checkPerms == undefined) {
+      await wait(500);
+    }
     if (!checkPerms) {
       BackHandler.exitApp();
     }

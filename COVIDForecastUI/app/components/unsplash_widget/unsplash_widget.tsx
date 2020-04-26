@@ -48,7 +48,6 @@ async function fetchPhoto() {
     userLink = unsplashUrl;
   } else {
     data = await result.json();
-    console.log(data);
     imgUrl = data.urls.regular;
     let firstName = "";
     let lastName = "";

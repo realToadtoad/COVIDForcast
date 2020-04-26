@@ -122,9 +122,7 @@ export class MapViewComponent extends React.Component {
     for (var i = 0; i < 50; i++) {
       await fetchCases(now.format("YYYY-MM-DD"), states[i], i);
     }
-    console.log("for loop completed");
     await wait(3000);
-    console.log(statesCases);
     this.forceUpdate();
   }
 

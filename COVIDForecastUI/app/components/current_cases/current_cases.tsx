@@ -18,6 +18,7 @@ import Papa from "papaparse";
 import moment from "moment";
 
 import { currentLocation, currentState } from "../../../App";
+import { fetchPredictionData, predictionOut } from "../../classes/prediction_ihme/prediction_ihme";
 
 function wait(timeout: number) {
   return new Promise((resolve) => {
@@ -65,11 +66,15 @@ async function fetchCases(date: string) {
 }
 
 export class CurrentCases extends React.Component {
+  currentStr = "??????";
+
   async componentDidMount() {
     let now = moment();
     await fetchCases(now.format("YYYY-MM-DD"));
     await wait(1000); // if anyone has a more elegant solution, please tell me
     this.forceUpdate();
+    await fetchPredictionData(moment().format("YYYY-MM-DD"));
+    console.log("new str")
   }
 
   render() {
@@ -99,7 +104,7 @@ export class CurrentCases extends React.Component {
             <View style={{ margin: 5 }}>
               <Text style={styles.lowerText}>PREDICTION</Text>
               <Text category="h2" style={styles.subheaderText}>
-                ??????
+                {predictionOut}
               </Text>
             </View>
           </Layout>

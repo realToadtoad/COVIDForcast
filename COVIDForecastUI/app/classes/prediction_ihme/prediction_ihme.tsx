@@ -14,44 +14,113 @@ import {
   Text,
 } from "@ui-kitten/components";
 import moment from "moment";
-import * as FileSystem from 'expo-file-system';
-import { zip, unzip, unzipAssets, subscribe } from 'react-native-zip-archive';
+import * as FileSystem from "expo-file-system";
+import Papa from "papaparse";
 
 import { IHMEStorage } from "../storage_abstraction/storage_abstraction";
+import { currentState } from "../../../App";
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
+let data: any;
+export let predictionOut: any = "??????";
+
+function wait(timeout: number) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, timeout);
+  });
+}
+
 async function checkCache() {
   const cacheDate = await IHMEStorage.getItem("cacheDate");
-  return cacheDate;
+  if (cacheDate != null) {
+    return cacheDate;
+  } else {
+    return "2000-01-01";
+  }
 }
 
 async function fetchCache(cacheDate: any) {
   let cacheCSV;
-  if(typeof cacheDate != undefined || typeof cacheDate != null) {
+  if (typeof cacheDate != undefined || typeof cacheDate != null) {
     cacheCSV = await IHMEStorage.getItem(cacheDate);
   }
 }
 
-async function checkForLatestExt() {
-  let now = moment();
-  let str = now.format("YYYY-MM-DD");
-  let url = "https://ihmecovid19storage.blob.core.windows.net/archive/" + str + "/ihme-covid19.zip";
-  while (!Linking.canOpenURL(url)) {
-    now = moment().subtract(1, "days");
-    str = now.format("YYYY-MM-DD");
-    url = "https://ihmecovid19storage.blob.core.windows.net/archive/" + str + "/ihme-covid19.zip";
+async function downloadSaveExt(date: string) {
+  let url =
+    "https://raw.githubusercontent.com/realToadtoad/CoVCast/master/ihme-covid-est.csv";
+  Papa.parse(url, {
+    download: true,
+    complete: async function (res) {
+      data = res.data;
+      console.log("has data");
+      while (typeof data == undefined || typeof currentState == undefined) {
+        await wait(500);
+      }
+      console.log("now filtering");
+      let temp = data
+        .filter(function (obj: any) {
+          return obj[1] == currentState;
+        })
+        .find(function (obj: any) {
+          return obj[2] == date;
+        });
+      console.log(temp);
+      let predictionD = temp[21];
+      let prediction = Math.round(predictionD * (1 / 0.034));
+      console.log("prediction");
+      console.log(prediction);
+      predictionOut = prediction;
+    },
+  });
+  while (typeof data == undefined) {
+    await wait(500);
   }
-  return str;
+  //let csv: string = Papa.unparse(data);
+  //while(typeof csv == undefined) {
+  //  await wait(500);
+  //}
+  //await IHMEStorage.setItem(date, csv);
+  //await IHMEStorage.setItem("cacheDate", date)
 }
 
-async function downloadSaveExt(date: any) {
-  let url = "https://ihmecovid19storage.blob.core.windows.net/archive/" + date + "/ihme-covid19.zip";
-  let res = await FileSystem.downloadAsync(url, FileSystem.cacheDirectory + "covid-" + date + ".zip");
-
+export async function fetchPredictionData(date?: string) {
+  if (typeof date == undefined) {
+    date = moment().format("YYYY-MM-DD");
+  }
+  let cacheDate = moment(await checkCache());
+  let today = moment();
+  let duration = moment.duration(today.diff(cacheDate));
+  if (Math.abs(duration.asDays()) >= 7) {
+    await IHMEStorage.removeItem(date);
+    await downloadSaveExt(date);
+  } else {
+    Papa.parse(await IHMEStorage.getItem(date), {
+      complete: async function (res) {
+        data = res.data;
+        console.log("has data");
+        while (typeof data == undefined || typeof currentState == undefined) {
+          await wait(500);
+        }
+        console.log("now filtering");
+        let temp = data
+          .filter(function (obj: any) {
+            return obj[1] == currentState;
+          })
+          .find(function (obj: any) {
+            return obj[2] == date;
+          });
+        console.log("prediction");
+        let predictionD = temp[21];
+        let prediction = Math.round(predictionD * (1 / 0.034));
+        predictionOut = prediction;
+      },
+    });
+  }
 }
-
+//*/
 /*
 export class Name extends React.Component {
   render() {
