@@ -28,11 +28,10 @@ import ReverseGeocode, {
   ILocation,
   IGeocode,
 } from "bigdatacloud-reverse-geocoding";
-import * as tf from '@tensorflow/tfjs';
-import 'tfjs-react-native-expo-fix';
 
 import { MainScreen } from "./app/screens/main_screen/main_screen";
 import { AboutNavigator as AboutScreen } from "./app/screens/about_screen/about_screen";
+import {tfGetReady, tfReady} from "./app/classes/prediction_ml/prediction_ml";
 
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
@@ -53,7 +52,6 @@ const geocode = new ReverseGeocode();
 
 export default class App extends React.Component {
   fontsLoaded = false;
-  tfReady = false;
 
   async loadFonts() {
     await Font.loadAsync({
@@ -85,8 +83,7 @@ export default class App extends React.Component {
 
   async initializeApp() {
     await this.loadFonts();
-    await tf.ready();
-    this.tfReady = true;
+    await tfGetReady();
   }
 
   async getLocationPermissions() {
@@ -137,7 +134,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (!this.fontsLoaded || !this.tfReady) {
+    if (!this.fontsLoaded || !tfReady) {
       return <AppLoading />;
     } else {
       return (
@@ -182,3 +179,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+
