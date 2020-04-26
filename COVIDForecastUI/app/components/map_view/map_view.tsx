@@ -101,9 +101,9 @@ async function fetchCases(date: string, state: string, index: number) {
     dayStr +
     ".csv";
   let currentCases: number;
-  await Papa.parse(url, {
+  Papa.parse(url, {
     download: true,
-    complete: function (res) {
+    complete: async function (res) {
       currentCases = res.data.find(function (obj: any) {
         return obj[0] == state; // [0] is the column for the state
       })[5];
@@ -116,81 +116,88 @@ let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
 export class MapViewComponent extends React.Component {
+
   async UNSAFE_componentWillMount() {
     let now = moment();
     for (var i = 0; i < 50; i++) {
       await fetchCases(now.format("YYYY-MM-DD"), states[i], i);
     }
+    console.log("for loop completed");
     await wait(3000);
+    console.log(statesCases);
     this.forceUpdate();
   }
 
   render() {
     let jsonVals = Object.values(capitalsJSON);
-    return (
-      <View style={styles.mapContainer}>
-        <MapView
-          style={styles.map}
-          initialRegion={{
-            latitude: currentLocation.coords.latitude,
-            longitude: currentLocation.coords.longitude,
-            latitudeDelta: 15,
-            longitudeDelta: 15,
-          }}
-          customMapStyle={mapStyleJSON.mapStyle}
-        >
-          <Marker
-            image={redMarker}
-            coordinate={{
+    if (statesCases.length < 50) {
+      return <View style={styles.mapContainer}></View>;
+    } else {
+      return (
+        <View style={styles.mapContainer}>
+          <MapView
+            style={styles.map}
+            initialRegion={{
               latitude: currentLocation.coords.latitude,
               longitude: currentLocation.coords.longitude,
+              latitudeDelta: 15,
+              longitudeDelta: 15,
             }}
+            customMapStyle={mapStyleJSON.mapStyle}
           >
-            <Callout tooltip>
-              <View style={styles.calloutContent}>
-                <View style={styles.bubble2}>
-                  <Text style={styles.calloutHeader}>Your Location</Text>
-                </View>
-                <View style={styles.arrowBorder2} />
-                <View style={styles.arrow2} />
-              </View>
-            </Callout>
-          </Marker>
-          {jsonVals.map((item) => (
             <Marker
-              image={blueMarker}
+              image={redMarker}
               coordinate={{
-                latitude: parseFloat(item.lat),
-                longitude: parseFloat(item.long),
+                latitude: currentLocation.coords.latitude,
+                longitude: currentLocation.coords.longitude,
               }}
             >
               <Callout tooltip>
                 <View style={styles.calloutContent}>
-                  <View style={styles.bubble1}>
-                    <Text style={styles.calloutHeader}>{item.name}</Text>
-                    <Text style={styles.calloutText}>
-                      Cases: {statesCases[states.indexOf(item.name)]}
-                    </Text>
+                  <View style={styles.bubble2}>
+                    <Text style={styles.calloutHeader}>Your Location</Text>
                   </View>
-                  <View style={styles.arrowBorder1} />
-                  <View style={styles.arrow1} />
+                  <View style={styles.arrowBorder2} />
+                  <View style={styles.arrow2} />
                 </View>
               </Callout>
             </Marker>
-          ))}
-          {jsonVals.map((item) => (
-            <Circle
-              center={{
-                latitude: parseFloat(item.lat),
-                longitude: parseFloat(item.long),
-              }}
-              radius={item.cases*1.2}
-              fillColor={"rgba(252, 36, 3, 0.25)"}
-            />
-          ))}
-        </MapView>
-      </View>
-    );
+            {jsonVals.map((item) => (
+              <Marker
+                image={blueMarker}
+                coordinate={{
+                  latitude: parseFloat(item.lat),
+                  longitude: parseFloat(item.long),
+                }}
+              >
+                <Callout tooltip>
+                  <View style={styles.calloutContent}>
+                    <View style={styles.bubble1}>
+                      <Text style={styles.calloutHeader}>{item.name}</Text>
+                      <Text style={styles.calloutText}>
+                        Cases: {statesCases[states.indexOf(item.name)]}
+                      </Text>
+                    </View>
+                    <View style={styles.arrowBorder1} />
+                    <View style={styles.arrow1} />
+                  </View>
+                </Callout>
+              </Marker>
+            ))}
+            {jsonVals.map((item) => (
+              <Circle
+                center={{
+                  latitude: parseFloat(item.lat),
+                  longitude: parseFloat(item.long),
+                }}
+                radius={statesCases[states.indexOf(item.name)] * 2}
+                fillColor={"rgba(252, 36, 3, 0.25)"}
+              />
+            ))}
+          </MapView>
+        </View>
+      );
+    }
   }
 }
 
