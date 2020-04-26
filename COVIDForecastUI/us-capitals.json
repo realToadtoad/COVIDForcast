@@ -2,8 +2,9 @@
     "AL": {
       "name": "Alabama",
       "capital": "Montgomery",
-      "lat": "32.2142",
-      "long": "-86.1645"
+      "lat": "32.361538",
+      "long": "-86.279118",
+      "cases": 70000
     },
     "AK": {
       "name": "Alaska",
