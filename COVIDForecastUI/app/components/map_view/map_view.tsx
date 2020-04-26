@@ -34,6 +34,7 @@ const blueMarker = require("../../../assets/blue-marker.png");
 const redMarker = require("../../../assets/red-marker.png");
 
 let states = [
+  "Alabama",
   "Alaska",
   "Arizona",
   "Arkansas",
@@ -79,11 +80,12 @@ let states = [
   "Utah",
   "Vermont",
   "Virginia",
+  "Washington",
   "West Virginia",
   "Wisconsin",
   "Wyoming",
 ];
-let statesCases = new Array(50);
+let statesCases = new Array();
 
 function wait(timeout: number) {
   return new Promise((resolve) => {
@@ -105,7 +107,7 @@ async function fetchCases(date: string, state: string, index: number) {
       currentCases = res.data.find(function (obj: any) {
         return obj[0] == state; // [0] is the column for the state
       })[5];
-      statesCases[index] = currentCases;
+      statesCases.push(currentCases);
     },
   });
 }
@@ -116,7 +118,7 @@ let deviceWidth = Dimensions.get("window").width;
 export class MapViewComponent extends React.Component {
   async UNSAFE_componentWillMount() {
     let now = moment();
-    for (var i = 0; i < 48; i++) {
+    for (var i = 0; i < 50; i++) {
       await fetchCases(now.format("YYYY-MM-DD"), states[i], i);
     }
     await wait(3000);
@@ -182,7 +184,7 @@ export class MapViewComponent extends React.Component {
                 latitude: parseFloat(item.lat),
                 longitude: parseFloat(item.long),
               }}
-              radius={item.cases * (Math.floor(Math.random() * 2) + 0.5)}
+              radius={item.cases*1.2}
               fillColor={"rgba(252, 36, 3, 0.25)"}
             />
           ))}
