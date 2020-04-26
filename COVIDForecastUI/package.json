@@ -44,6 +44,7 @@
     "react-native-unimodules": "^0.9.0",
     "react-native-web": "~0.11.7",
     "react-native-webview": "^8.1.1",
+    "react-native-zip-archive": "^5.0.2",
     "react-navigation": "^4.3.8",
     "react-navigation-stack": "^2.3.13",
     "tfjs-react-native-expo-fix": "https://github.com/realToadtoad/tfjs-react-native-expo-fix-fix/archive/test.tar.gz"
