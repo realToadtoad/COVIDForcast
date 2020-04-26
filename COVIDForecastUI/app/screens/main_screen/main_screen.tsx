@@ -1,4 +1,5 @@
 import React from "react";
+
 import {
   StyleSheet,
   View,
@@ -43,6 +44,12 @@ function wait(timeout: number) {
     setTimeout(resolve, timeout);
   });
 }
+
+/*async function trainModel(model, inputs, labels) {
+  model.compile({
+
+  })
+}*/
 
 const blueMarker = require("../../../assets/blue-marker.png");
 const redMarker = require("../../../assets/red-marker.png");

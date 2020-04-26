@@ -34,6 +34,8 @@ import 'tfjs-react-native-expo-fix';
 import { MainScreen } from "./app/screens/main_screen/main_screen";
 import { AboutNavigator as AboutScreen } from "./app/screens/about_screen/about_screen";
 
+import {default as dataJSON} from "./data.json";
+
 let deviceHeight = Dimensions.get("window").height;
 let deviceWidth = Dimensions.get("window").width;
 
@@ -182,3 +184,52 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+async function getData() {
+  const data = dataJSON.json();
+
+  return data;
+}
+
+function convertToTensor(data) {
+  tf.util.shuffle(data);
+}
+
+function createModel() {
+  const model = tf.sequential();
+
+  model.add(tf.layers.dense({inputShape: [7], units: 64, useBias: true}));
+  //model.add(tf.layers.dropout());
+  model.add(tf.layers.dense({units: 64, useBias: true}));
+  model.add(tf.layers.dense({units: 64, useBias: true}));
+  model.add(tf.layers.dense({units: 1, useBias: true}));
+
+  return model;
+}
+
+async function trainModel(model, inputs, labels) {
+  model.compile({
+    optimizer: tf.train.adam(),
+    loss: tf.losses.meanSquaredError,
+    metrics: ['mse', 'mae'],
+  });
+
+  const batchSize = 7;
+  const epochs = 1000;
+
+  return await model.fit(inputs, labels, {
+    batchSize,
+    epochs, 
+    shuffle: true
+  });
+}
+
+async function run() {
+  const data = await getData();
+}
+
+//const model = createModel();
+//trainModel(model, data, data);
+
+
+
