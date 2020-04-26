@@ -175,7 +175,7 @@ export class MapViewComponent extends React.Component {
                     <View style={styles.bubble1}>
                       <Text style={styles.calloutHeader}>{item.name}</Text>
                       <Text style={styles.calloutText}>
-                        Cases: {statesCases[states.indexOf(item.name)]}
+                        Cases Today: {statesCases[states.indexOf(item.name)]}
                       </Text>
                     </View>
                     <View style={styles.arrowBorder1} />
